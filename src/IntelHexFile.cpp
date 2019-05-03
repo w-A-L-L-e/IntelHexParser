@@ -30,7 +30,8 @@ IntelHexFile::IntelHexFile(string filename)
 
 		IntelHexFileEntry entry(buffer);
 
-		if((entry.getRecordType() != 0x0) && (entry.getRecordType() != 0x1))
+    // 0x00 is data, 0x01 is an end of file record
+		if((entry.getRecordType() != 0x0) && (entry.getRecordType() != 0x1) && (entry.getRecordType()!=0x03)) // 0x03 is start segment address 
 		{
 			stringstream o;
 			o << "Unsupported record type: 0x";
@@ -58,5 +59,6 @@ ostream& operator<<(ostream& os, const IntelHexFile& rhs)
 	size_t size = rhs.addressToFileEntries.size();
 
 	os << "[Address Range: 0x" << hex << (size_t)lAddress << "-0x" << hex << (size_t)hAddress << ", Number of HexFileEntries: " << dec << size << "]";
+  return os;
 }
 

@@ -7,7 +7,7 @@ using namespace std;
 
 void usage(string name);
 
-#define PAGE_SIZE 255
+#define PAGE_SIZE 16
 
 int main(int argc, char* argv[])
 {

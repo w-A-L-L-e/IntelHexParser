@@ -9,7 +9,7 @@ SRC = \
 
 OBJ = $(SRC:.cpp=.o)
 LIBNAME = lib$(LNAME).so
-OUT = $(LIBNAME).1
+OUT = $(LIBNAME)
 REALNAME = $(OUT)
 
 # Include Directories
@@ -31,7 +31,9 @@ all: build
 build: $(OUT)
  
 $(OUT): $(OBJ)
-	$(CCC) -shared -Wl,-soname,$(OUT) -o $(REALNAME) $(OBJ) 
+	#$(CCC) -shared -Wl,-soname $(OUT) -o $(REALNAME) $(OBJ) 
+	$(CCC) -shared -Wl -o $(REALNAME) $(OBJ) 
+	ln -sf $(REALNAME) $(REALNAME).1
 
 .cpp.o:
 	$(CCC) $(INCLUDES) $(CCFLAGS) -c $< -o $@ 
