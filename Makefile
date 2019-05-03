@@ -6,7 +6,7 @@ SRC = \
 	src/IntelHexFileEntry.cpp \
 	src/Program.cpp \
 	src/ProgramPage.cpp \
-	src/hex_converter.cpp
+	src/hexconvert.cpp
 
 OBJ = $(SRC:.cpp=.o)
 TOOL = hexconvert
