@@ -25,6 +25,7 @@ class ProgramPage
     size_t address;
     size_t pageSize;
     vector<uint8_t> data;
+    
   public:
     ProgramPage(size_t address, size_t pageSize, const vector<uint8_t>& pageData);
     ~ProgramPage();
@@ -37,6 +38,7 @@ class ProgramPage
     vector<uint8_t> getData();
 
     friend ostream& operator<<(ostream& os, const ProgramPage& rhs);
+    bool verbose;
 };
 
 #endif

@@ -1,4 +1,5 @@
 #include <Program.h>
+#include <iomanip>
 
 Program::Program(const map<uint16_t, IntelHexFileEntry>& addressToFileEntries)
 {
@@ -46,7 +47,7 @@ ostream& operator<<(ostream& os, const Program& rhs)
 	for(vector<uint8_t>::const_iterator it = rhs.data.begin(); it != rhs.data.end(); ++it)
 	{
 		uint8_t v = (*it);
-		os << hex << (size_t)v;
+		os << hex << setfill('0') << setw(2) << (size_t)v;
 	}
 
 	os << dec << "]";

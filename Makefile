@@ -5,46 +5,38 @@ SRC = \
 	src/IntelHexFile.cpp \
 	src/IntelHexFileEntry.cpp \
 	src/Program.cpp \
-	src/ProgramPage.cpp
+	src/ProgramPage.cpp \
+	src/hex_converter.cpp
 
 OBJ = $(SRC:.cpp=.o)
-LIBNAME = lib$(LNAME).so
-OUT = $(LIBNAME)
-REALNAME = $(OUT)
+TOOL = hexconvert
+
 
 # Include Directories
 INCLUDES = -I./include/
 
-CCFLAGS = -g -fPIC
+CCFLAGS = -O2 -fPIC
 CCC = g++
-
-#Library Paths
-LIBS =
- 
-# compile flags
-LDFLAGS = -g
  
 .SUFFIXES: .cpp
  
 all: build
 
-build: $(OUT)
+build: $(TOOL)
  
-$(OUT): $(OBJ)
-	#$(CCC) -shared -Wl,-soname $(OUT) -o $(REALNAME) $(OBJ) 
-	$(CCC) -shared -Wl -o $(REALNAME) $(OBJ) 
-	ln -sf $(REALNAME) $(REALNAME).1
+$(TOOL): $(OBJ)
+	$(CCC) -Wall -O2 -o $(TOOL) $(OBJ) 
 
 .cpp.o:
 	$(CCC) $(INCLUDES) $(CCFLAGS) -c $< -o $@ 
 
 
-install: build
-	mkdir -p /usr/include/$(LNAME)/
-	cp include/* /usr/include/$(LNAME)/
-	cp $(REALNAME) /usr/lib/
-	ln -sf /usr/lib/$(REALNAME) /usr/lib/$(LIBNAME)
+#install: build
+#	#mkdir -p /usr/include/$(LNAME)/
+#	#cp include/* /usr/include/$(LNAME)/
+#	#cp $(REALNAME) /usr/lib/
+#	ln -sf /usr/lib/$(REALNAME) /usr/lib/$(LIBNAME)
 
 clean:
-	rm -f $(OBJ) $(OUT)
+	rm -f $(OBJ) $(TOOL)
 
