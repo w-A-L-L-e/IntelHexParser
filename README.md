@@ -11,4 +11,6 @@ reformatting compiled hex files that we need to generate a combined hex for our 
 https://github.com/w-A-L-L-e/anykey-bootloader
 
 Also we will statically link and add some commandline params as we need a commandline conversion tool, not a library to incorporate somewhere...
+Basically we want to load in ihex files and change the bytes per line on the fly to combine different formats etc.
+https://en.wikipedia.org/wiki/Intel_HEX
 
