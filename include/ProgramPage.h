@@ -34,6 +34,7 @@ class ProgramPage
     size_t getPageSize();
     size_t getSize();
     size_t getEndAddress();
+    int getChecksum(uint8_t dataByteSum ) const;
 
     vector<uint8_t> getData();
 

@@ -14,3 +14,6 @@ Also we will statically link and add some commandline params as we need a comman
 Basically we want to load in ihex files and change the bytes per line on the fly to combine different formats etc.
 https://en.wikipedia.org/wiki/Intel_HEX
 
+By no means coded cleanly. Just some quick hacks during lunchtime in order to combine some hex files...
+
+

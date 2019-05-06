@@ -1,16 +1,37 @@
 #include <Program.h>
 #include <iomanip>
+#include <iostream>
 
 Program::Program(const map<uint16_t, IntelHexFileEntry>& addressToFileEntries)
 {
 	size_t hAddress = ((addressToFileEntries.rbegin())->second).getEndAddress();
 	data.resize(hAddress);
 
+  //initialize entire firmware data block to FF
+  for(int i=0;i<data.size();i++){
+    data[i]=0xff;
+  }
+
 	for(map<uint16_t, IntelHexFileEntry>::const_iterator it = addressToFileEntries.begin(); it != addressToFileEntries.end(); ++it)
 	{
 		size_t address = (size_t)it->first;
 		IntelHexFileEntry entry = it->second;
 		vector<uint8_t> entryData = entry.getData();
+   
+    /*
+    cout<<"entrydata on address"<<address<<"=";
+    for(int i=0;i<entryData.size();i++){
+      cout << hex << setw(2)<< (int)entryData[i] << " ";
+    }
+    cout<<endl<<endl;
+    when for instance data is offset to 70 00 we see it on first data entry
+
+    entrydata on address0= 0  0 70  0 
+
+    but real data is here:
+    entrydata on address7000=55 c0  0  0 6e c0  0  0 6c c0  0  0 6a c0  0  0 
+
+    */
 
 		for(size_t i = 0; i < entryData.size(); i++)
 		{
